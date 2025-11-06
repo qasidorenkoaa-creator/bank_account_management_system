@@ -20,6 +20,9 @@ class BankAccount:
     def get_balance(self):
         return self.__balance
 
+    def set_balance(self, new_balance):
+        self.__balance = new_balance
+
     def show_balance(self):
         print(f"Текущий баланс: {self.__balance}$")
 
@@ -27,17 +30,19 @@ class BankAccount:
 class SavingsAccount(BankAccount):
     def __init__(self, bank_account, interest_rate=0.05):
         super().__init__(bank_account.owner, bank_account.get_balance())
-        self._BankAccount__balance = bank_account.get_balance()
+        self.bank_account = bank_account
         self.interest_rate = interest_rate
 
     def apply_interest(self):
-        receiving_interest = self._BankAccount__balance * self.interest_rate
-        self._BankAccount__balance += receiving_interest
+        current_balance = self.bank_account.get_balance()
+        receiving_interest = current_balance * self.interest_rate
+        new_balance = current_balance + receiving_interest
+        self.bank_account.set_balance(new_balance)
         print(f"Начислены проценты на остаток по счету: {receiving_interest}$"
-              f"\nОбновленный баланс: {self._BankAccount__balance}$")
+              f"\nОбновленный баланс: {self.bank_account.get_balance()}$")
 
     def get_saving_balance(self):
-        return self._BankAccount__balance
+        return self.bank_account.get_balance()
 
 
 class CheckingAccount(BankAccount):
@@ -51,8 +56,9 @@ class CheckingAccount(BankAccount):
             debt = amount - current_balance
             print(f"Снятие на сумму {amount}$, превышающую баланс, ваш долг составляет: {debt}$")
         else:
-            current_balance -= amount
-            print(f"Снятие средств на сумму: {amount}$\nТекущий баланс: {current_balance}$")
+            new_balance = current_balance - amount
+            self.savings_account.bank_account.set_balance(new_balance)
+            print(f"Снятие средств на сумму: {amount}$\nТекущий баланс: {self.savings_account.get_saving_balance()}$")
 
 
 user_operations = BankAccount("Artur")
