@@ -1,0 +1,29 @@
+# Виртуальное окружение
+.venv/
+venv/
+
+# Python кэши
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# IDE
+.idea/
+.vscode/
+
+# macOS
+.DS_Store
+
+# Allure отчёты
+allure-results/
+allure-report/
+
+# graphify (граф строится локально)
+graphify-out/
+
+# секреты
+.env
+
+# Локальные файлы (не для репо)
+requirements.txt
+tests_1.py
