@@ -1,5 +1,5 @@
 import pytest
-from bank_account import SavingsAccount
+from bank_account_management_system_v2 import SavingsAccount
 
 
 def test_balance_positive_after_deposit_withdraw_and_interest():
